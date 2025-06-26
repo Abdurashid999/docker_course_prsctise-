@@ -1,0 +1,11 @@
+models:
+- name: stg_flight__seats
+  tests:
+    - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - aircraft_code
+          - seat_no
+
+- name: stg_flight__flights
+  columns:
+    - name: status
