@@ -9,19 +9,26 @@ models:
       - v: 1
     config:
       contract: {enforced: true}
-    meta:
-      owner: "0611qk@gmail.com"
-      contact_tg: 0611qk
-      status: in_dev
+
+      meta: {owner: "sql_file_owner@gmail.com", status: in_dev, my_meta: new }
     
     columns: 
       - name: book_ref
-        data_type: bpchar(6)
+        description: Уникальный номер брони
+        data_type: varchar  
         constraints:
           - type: not_null
+        tags: 
+          - "fact"
+          - "flights"  
+        tests: [not_null, unique]
+
       - name: book_date
+        description: Дата бронирования
         data_type: timestamptz
+
       - name: total_amount
+        description: Общая сумма бронирования
         data_type: numeric(10,2)
         constraints:
           - type: check 
@@ -30,6 +37,4 @@ models:
           - not_null
         meta:
           owner: finance_team
-        qoute: false 
-
-        
+        quote: false  # Исправлено с qoute

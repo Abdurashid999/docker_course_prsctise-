@@ -1,12 +1,19 @@
   {{
       config(
-          materialized = 'table'
+          materialized = 'table',
+          tags = ['bookings']
+
       )  
   }}
   
-        select
+        select 
             book_ref,
             book_date,
-            total_amount
-  from {{ source('demo_src', 'bookings') }}
+            total_amount 
+  from                                                        
+   {{ source('demo_src', 'bookings') }}
+   
+  {{limit_date_dev('book_date', 3000)}}
+
+
       
